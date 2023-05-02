@@ -63,3 +63,12 @@ def store_messages(request_message, response_message):
     # Save the updated file
     with open(file_name, "w") as f:
         json.dump(messages, f)
+
+# Reset messages
+def reset_messages():
+
+    # Define the file name
+    file_name = "store_data.json"
+
+    # Overwrite current file with nothing
+    open(file_name, "w")

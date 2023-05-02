@@ -7,7 +7,7 @@ import openai
 
 # Custom Function Imports
 from utils.openai_requests import convert_audio_to_text, get_chat_response
-from utils.database import store_messages
+from utils.database import store_messages, reset_messages
 
 # Initiate the App
 app = FastAPI()
@@ -29,6 +29,11 @@ app.add_middleware(
 @app.get("/health")
 async def check_health():
     return {"message": "health"}
+
+@app.get("/reset-messages")
+async def reset():
+    reset_messages()
+    return "Done"
 
 @app.get("/post-audio-get/")
 async def get_audio():
