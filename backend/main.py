@@ -7,6 +7,7 @@ import openai
 
 # Custom Function Imports
 from utils.openai_requests import convert_audio_to_text, get_chat_response
+from utils.database import store_messages
 
 # Initiate the App
 app = FastAPI()
@@ -33,7 +34,7 @@ async def check_health():
 async def get_audio():
 
     # Get saved audio
-    audio_input = open("test.m4a", "rb")
+    audio_input = open("./media/test.m4a", "rb")
 
     # Decode Audio
     message_text = convert_audio_to_text(audio_file=audio_input)
@@ -44,6 +45,9 @@ async def get_audio():
 
     # Get ChatGPT Response
     chat_response = get_chat_response(message_text)
+
+    # Store message
+    store_messages(message_text, chat_response)
 
     print(chat_response)
     return "Done"
