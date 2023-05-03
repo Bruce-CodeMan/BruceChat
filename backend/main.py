@@ -37,7 +37,7 @@ async def reset():
     reset_messages()
     return "Done"
 
-@app.post("/post-audio-")
+@app.post("/post-audio")
 async def post_audio(file: UploadFile = File(...)):
 
     # Saved file from Frontend
